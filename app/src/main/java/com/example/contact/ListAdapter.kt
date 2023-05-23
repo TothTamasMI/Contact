@@ -1,10 +1,15 @@
 package com.example.contact
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contact.databinding.CustomRowBinding
+import java.util.concurrent.Executors
 
 class ListAdapter(): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     private var contactList = emptyList<Contact>()
@@ -22,6 +27,27 @@ class ListAdapter(): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
                 binding.nameTextView.text = name
                 binding.emailTextView.text = email
                 binding.locationTextView.text = location
+
+                val executor = Executors.newSingleThreadExecutor()
+                val handler = Handler(Looper.getMainLooper())
+                var image: Bitmap? = null
+
+                executor.execute{
+                    val imageURL = picture
+                    try {
+
+                        val input = java.net.URL(imageURL).openStream()
+                        image = BitmapFactory.decodeStream(input)
+                        handler.post{
+                            binding.imageView.setImageBitmap(image)
+                        }
+
+                    }catch (e: Exception){
+
+                        e.printStackTrace()
+
+                    }
+                }
             }
         }
     }
