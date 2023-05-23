@@ -26,6 +26,7 @@ class ContactListActivity : AppCompatActivity() {
         val adapter = ListAdapter()
         val recyclerView = binding.recyclerview
         val layoutManager = LinearLayoutManager(this)
+
         recyclerView.adapter = adapter
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = layoutManager
@@ -54,9 +55,5 @@ class ContactListActivity : AppCompatActivity() {
             contactDb.contactDao().addContact(contact)
 
         }
-    }
-
-    private fun readAllContact(){
-
     }
 }
