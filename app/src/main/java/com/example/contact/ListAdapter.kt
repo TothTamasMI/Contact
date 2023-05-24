@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contact.databinding.CustomRowBinding
 import java.util.concurrent.Executors
 
-class ListAdapter(): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
+class ListAdapter(clikListener: ClickListener): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     private var contactList = emptyList<Contact>()
+    private var clikListener: ClickListener = clikListener
 
     inner class MyViewHolder (val binding: CustomRowBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -49,6 +50,9 @@ class ListAdapter(): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
                     }
                 }
             }
+            itemView.setOnClickListener{
+                clikListener.clickedItem(contactList[position])
+            }
         }
     }
 
@@ -59,5 +63,9 @@ class ListAdapter(): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     fun setData(contact: List<Contact>){
         this.contactList = contact
         notifyDataSetChanged()
+    }
+
+    interface ClickListener{
+        fun clickedItem(contact: Contact)
     }
 }

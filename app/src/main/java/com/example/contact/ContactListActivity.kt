@@ -1,5 +1,6 @@
 package com.example.contact
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -16,7 +17,7 @@ import org.json.JSONArray
 import java.io.InputStream
 import java.net.URL
 
-class ContactListActivity : AppCompatActivity() {
+class ContactListActivity : AppCompatActivity(), ListAdapter.ClickListener {
 
     private lateinit var binding: ActivityContactListBinding
     private lateinit var contactDb : ContactDatabase
@@ -31,7 +32,7 @@ class ContactListActivity : AppCompatActivity() {
 
         //GlobalScope.launch(Dispatchers.IO) { contactDb.contactDao().deleteAllContact()}
 
-        val adapter = ListAdapter()
+        val adapter = ListAdapter(this)
         val recyclerView = binding.recyclerview
         val layoutManager = LinearLayoutManager(this)
 
@@ -77,4 +78,10 @@ class ContactListActivity : AppCompatActivity() {
         val secondHalf = firstHalf.substring(0, firstHalf.indexOf("\""))
         return secondHalf
     }
+
+    override fun clickedItem(contact: Contact) {
+        startActivity(Intent(this, ContactDetailActivity::class.java).putExtra("name", contact.name))
+    }
+
+
 }
