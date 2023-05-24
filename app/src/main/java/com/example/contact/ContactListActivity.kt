@@ -80,7 +80,12 @@ class ContactListActivity : AppCompatActivity(), ListAdapter.ClickListener {
     }
 
     override fun clickedItem(contact: Contact) {
-        startActivity(Intent(this, ContactDetailActivity::class.java).putExtra("name", contact.name))
+        startActivity(Intent(this, ContactDetailActivity::class.java)
+            .putExtra("name", contact.name)
+            .putExtra("email", contact.email)
+            .putExtra("phone", contact.phone)
+            .putExtra("cell", contact.cell)
+            .putExtra("picture", contact.picture))
     }
 
 

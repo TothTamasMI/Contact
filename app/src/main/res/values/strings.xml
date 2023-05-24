@@ -2,5 +2,10 @@
     <string name="app_name">Contact</string>
     <string name="name_text_view_sample">Name name</string>
     <string name="email_text_view_sample">email@email.email</string>
-    <string name="location_text_view_sample">location location location</string>
+    <string name="phone_text_view_sample">+7 333 782-42-32</string>
+    <string name="location_text_view_sample">Location, Location LOCATION</string>
+    <string name="cell_text_view_sample">(812) 782-42-32</string>
+    <string name="work">Work</string>
+    <string name="home">Home</string>
+    <string name="mobile">Mobile</string>
 </resources>
