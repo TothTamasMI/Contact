@@ -1,13 +1,13 @@
-package com.example.contact
+package com.example.contact.adapters
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.contact.database.Contact
 import com.example.contact.databinding.CustomRowBinding
 import java.util.concurrent.Executors
 
@@ -25,6 +25,7 @@ class ListAdapter(clikListener: ClickListener): RecyclerView.Adapter<ListAdapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         with(holder){
             with(contactList[position]){
+
                 binding.nameTextView.text = name
                 binding.emailTextView.text = email
                 binding.locationTextView.text = location
@@ -34,6 +35,7 @@ class ListAdapter(clikListener: ClickListener): RecyclerView.Adapter<ListAdapter
                 var image: Bitmap? = null
 
                 executor.execute{
+
                     val imageURL = picture
                     try {
 
@@ -44,12 +46,11 @@ class ListAdapter(clikListener: ClickListener): RecyclerView.Adapter<ListAdapter
                         }
 
                     }catch (e: Exception){
-
                         e.printStackTrace()
-
                     }
                 }
             }
+
             itemView.setOnClickListener{
                 clikListener.clickedItem(contactList[position])
             }

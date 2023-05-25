@@ -1,4 +1,4 @@
-package com.example.contact
+package com.example.contact.database
 
 import android.content.Context
 import androidx.room.Database
@@ -14,11 +14,12 @@ abstract class ContactDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ContactDatabase? = null
 
-        fun getDatabase(context: Context): ContactDatabase{
+        fun getDatabase(context: Context): ContactDatabase {
             val temInstance = INSTANCE
             if(temInstance != null){
                 return temInstance
             }
+
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

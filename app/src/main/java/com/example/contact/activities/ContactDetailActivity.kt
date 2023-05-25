@@ -1,4 +1,4 @@
-package com.example.contact
+package com.example.contact.activities
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.WindowManager
-import android.widget.TextView
 import com.example.contact.databinding.ActivityContactDetailBinding
 import java.util.concurrent.Executors
 
@@ -26,27 +25,33 @@ class ContactDetailActivity : AppCompatActivity() {
     }
 
     private fun getData(){
+
         var intent = intent.extras
         var name = intent!!.getString("name")
         var email = intent!!.getString("email")
         var phone = intent!!.getString("phone")
         var cell = intent!!.getString("cell")
         var picture = intent!!.getString("picture")
+
         with(binding){
+
             nameDetailTextView.text = name
             phoneDetailTextView.text = phone
             cellDetailTextView.text = cell
             emailDetailTextView.text = email
-            picture?.let { urlToPicture(it) }
+            picture?.let { urlToPicture(it)}
+
         }
     }
 
     private fun urlToPicture(pictureURL: String){
+
         val executor = Executors.newSingleThreadExecutor()
         val handler = Handler(Looper.getMainLooper())
         var image: Bitmap? = null
 
         executor.execute{
+
             val imageURL = pictureURL
             try {
 
@@ -59,7 +64,6 @@ class ContactDetailActivity : AppCompatActivity() {
             }catch (e: Exception){
 
                 e.printStackTrace()
-
             }
         }
     }

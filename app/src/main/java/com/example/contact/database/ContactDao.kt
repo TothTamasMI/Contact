@@ -1,7 +1,8 @@
-package com.example.contact
+package com.example.contact.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.contact.database.Contact
 
 @Dao
 interface ContactDao {
@@ -17,4 +18,5 @@ interface ContactDao {
 
     @Query("DELETE FROM contact_table")
     suspend fun deleteAllContact()
+
 }
